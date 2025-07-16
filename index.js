@@ -12,39 +12,27 @@
  */
 
 
-const prevButton = document.getElementById("prev-button");
-const nextButton = document.getElementById("next-button");
-const slides = document.getElementById("slides")
-const arrImg = Array.from(slides.querySelectorAll("slide-img")); //здесь лежит массив с картинками
-const slideCount = slides.length;
+const slides = document.getElementById("slides");
+const counter = document.getElementById("counter");
+const totalSlides = slides.children.length;
 let currentIndex = 0;
 
-
-prevButton.addEventListener("click", showPrevSlide);
-nextButton.addEventListener("click", showNextSlide);
-
-function showPrevSlide() {
-    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
-    updateSlider();
-}
-function showNextSlide() {
-    currentIndex = [currentIndex + 1] % slideCount;
-    updateSlider();
-}
-
 function updateSlider() {
-    arrImg.forEach((slides, index) => {
-        if (index === currentIndex) {
-            slides.style.display = "block";
-        } else {
-            slides.style.display = "none";
-        }
-    })
-
+  slides.style.transform =`translateX(-${currentIndex * 100}%)`;
+  counter.textContent = `${currentIndex + 1} / ${totalSlides}`;
 }
+
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  updateSlider();
+}
+
+function prevSlide() {
+  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+  updateSlider();
+}
+
+document.getElementById("next").addEventListener("click", nextSlide);
+document.getElementById("prev").addEventListener("click", prevSlide);
+
 updateSlider();
-
-
-
-
-
