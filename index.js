@@ -12,74 +12,39 @@
  */
 
 
-const prevButton= document.getElementById("prev-button");
-const nextButton= document.getElementById("next-button");
-const sliderBox= document.getElementById("slider-box")
-const arrImg = Array.from(sliderBox.querySelectorAll("img")); //здесь лежит массив с картинками
-
-console.log(arrImg)
+const prevButton = document.getElementById("prev-button");
+const nextButton = document.getElementById("next-button");
+const slides = document.getElementById("slides")
+const arrImg = Array.from(slides.querySelectorAll("slide-img")); //здесь лежит массив с картинками
+const slideCount = slides.length;
+let currentIndex = 0;
 
 
 prevButton.addEventListener("click", showPrevSlide);
-nextButton.addEventListener("click",showNextSlide);
+nextButton.addEventListener("click", showNextSlide);
 
-function showPrevSlide(){
-
+function showPrevSlide() {
+    currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+    updateSlider();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 
-// Получаем элементы слайдера
-const slider = document.querySelector('.slider');
-const prevButton = document.querySelector('.prev-button');
-const nextButton = document.querySelector('.next-button');
-const slides = Array.from(slider.querySelectorAll('img'));
-const slideCount = slides.length;
-let slideIndex = 0;
-
-// Устанавливаем обработчики событий для кнопок
-prevButton.addEventListener('click', showPreviousSlide);
-nextButton.addEventListener('click', showNextSlide);
-
-// Функция для показа предыдущего слайда
-function showPreviousSlide() {
-  slideIndex = (slideIndex - 1 + slideCount) % slideCount;
-  updateSlider();
-}
-
-// Функция для показа следующего слайда
 function showNextSlide() {
-  slideIndex = (slideIndex + 1) % slideCount;
-  updateSlider();
+    currentIndex = [currentIndex + 1] % slideCount;
+    updateSlider();
 }
 
-// Функция для обновления отображения слайдера
 function updateSlider() {
-  slides.forEach((slide, index) => {
-    if (index === slideIndex) {
-      slide.style.display = 'block';
-    } else {
-      slide.style.display = 'none';
-    }
-  });
-}
+    arrImg.forEach((slides, index) => {
+        if (index === currentIndex) {
+            slides.style.display = "block";
+        } else {
+            slides.style.display = "none";
+        }
+    })
 
-// Инициализация слайдера
+}
 updateSlider();
- */
+
+
+
+
+
